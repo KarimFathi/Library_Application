@@ -1,0 +1,27 @@
+drop table livres cascade constraints;
+drop sequence livres_seq;
+
+CREATE TABLE LIVRES
+(  
+    id      	NUMBER(10) PRIMARY KEY,    
+    auteur   	VARCHAR2(50),
+    titre   	VARCHAR2(100),
+    editeur     VARCHAR2(50),
+    email_id    VARCHAR2(100),
+    siteweb     VARCHAR2(150),
+    date_id 	DATE,
+    nomU		VARCHAR2(50),
+    prenomU		VARCHAR2(50),
+    bool 		char check (bool in (0,1))
+);
+
+-- Generate ID using sequence and trigger
+CREATE SEQUENCE LIVRES_seq START WITH 1 INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER LIVRES_seq_tr
+ BEFORE INSERT ON LIVRES FOR EACH ROW
+ WHEN (NEW.id IS NULL)
+BEGIN
+ SELECT LIVRES_seq.NEXTVAL INTO :NEW.id FROM DUAL;
+END;
+/

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	
+	
+	<!-- Package "default", est utilisé lorsqu'une action n'a pu être trouvée dans un autre package -->
+	<package name="default" namespace="/" extends="struts-default">
+		<default-action-ref name="index" />
+		<action name="index"> 
+			<result type="redirectAction"> 
+				<param name="actionName">login</param> 
+				<param name="namespace">/</param> 
+			</result> 
+		</action> 
+	</package>
+	
+	
+	<package name="actions" extends="struts-default" namespace="/">	
+		<action name="add" class="com.livre.view.LivreAction" method="add">
+			<result name="success" type="chain">home</result>
+			<result name="input" type="chain">home</result>
+		</action>
+		<action name="delete" class="com.livre.view.LivreAction" method="delete">
+			<result name="success" type="chain">home</result>
+		</action>
+		<action name="home" class="com.livre.view.LivreAction">
+			<result name="success">JSP/home.jsp</result>
+		</action>
+		
+		<action name="add2" class="com.livre.view.ContactAction" method="add">
+			<result name="success" type="chain">home2</result>
+			<result name="input" type="chain">home2</result>
+		</action>
+		<action name="delete2" class="com.livre.view.ContactAction" method="delete">
+			<result name="success" type="chain">home2</result>
+		</action>
+		<action name="home2" class="com.livre.view.ContactAction">
+			<result name="success">JSP/home2.jsp</result>
+		</action>
+		
+		<action name="login" class="com.livre.view.LoginAction">
+            <result name="success">JSP/login.jsp</result>
+        </action>
+        
+        <action name="connect" class="com.livre.view.LoginAction" method="connect">
+            <result name="success">JSP/accueil.jsp</result>
+            <result name="input">JSP/accueil.jsp</result>
+            <result name="error">JSP/login.jsp</result>
+        </action>
+        
+        <action name="home3" class="com.livre.view.LivreAction">
+            <result name="success">JSP/home3.jsp</result>
+        </action>
+        
+        <action name="emprunt" class="com.livre.view.LivreAction" method="emprunter">
+            <result name="success" type="chain">home3</result>
+        </action>
+        
+        <action name="home4" class="com.livre.view.LivreAction">
+            <result name="success">JSP/home4.jsp</result>
+        </action>
+        
+        <action name="rendre" class="com.livre.view.LivreAction" method="rendreLivre">
+            <result name="success" type="chain">home4</result>
+        </action>
+	</package>
+</struts>

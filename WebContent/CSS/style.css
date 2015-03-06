@@ -1,0 +1,10 @@
+body, input{
+	font-family: Times New Roman, Calibri, Arial;
+}
+table#livre, table#contact {
+	border-collapse: collapse;
+	width:550px;
+}
+th {
+	height: 40px;
+}
